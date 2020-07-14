@@ -1,0 +1,54 @@
+﻿<Window x:Class="ExchangeContacts2CSV.EditorWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ExchangeContacts2CSV"
+        mc:Ignorable="d"
+        Title="Kontakte Editor" 
+		Height="500" 
+		Width="800"
+		WindowStyle="None"
+		Visibility="{Binding HasData, Converter={StaticResource BoolToVis}}">
+	
+    <Grid Margin="5">
+		<DataGrid x:Name="dgContacts"
+				  ItemsSource="{Binding Contacts, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+				  AutoGenerateColumns="False"
+				  CanUserReorderColumns="True"
+				  CanUserSortColumns="True"
+				  CanUserDeleteRows="True"
+				  CanUserAddRows="True"
+				  CellStyle="{StaticResource PaddedDataGridCell}">
+			<DataGrid.Columns>
+				<DataGridTextColumn Header="Titel" Binding="{Binding Title}"/>
+				<DataGridTextColumn Header="Vorname" Binding="{Binding GivenName}"/>
+				<DataGridTextColumn Header="Nachname" Binding="{Binding Surname}"/>
+				<DataGridTextColumn Header="Firmenname" Binding="{Binding CompanyName}"/>
+				<DataGridTextColumn Header="E-Mail" Binding="{Binding EMailAddress}"/>
+				<DataGridTextColumn Header="Memo" Binding="{Binding Memo}"/>
+				<DataGridTextColumn Header="Mobil (geschäftlich)" Binding="{Binding CellBusiness}"/>
+				<DataGridTextColumn Header="Mobil Kurzwahl (geschäftlich)" Binding="{Binding CellBusinessSpeedDial}"/>
+				<DataGridTextColumn Header="Mobil Beschreibung (geschäftlich)" Binding="{Binding CellBusinessDescription}"/>
+				<DataGridTextColumn Header="Arbeit" Binding="{Binding Work}"/>
+				<DataGridTextColumn Header="Arbeit Kurzwahl" Binding="{Binding WorkSpeedDial}"/>
+				<DataGridTextColumn Header="Arbeit Beschreibung" Binding="{Binding WorkDescription}"/>
+				<DataGridTextColumn Header="Fax" Binding="{Binding Fax}"/>
+				<DataGridTextColumn Header="Fax Kurzwahl" Binding="{Binding FaxSpeedDial}"/>
+				<DataGridTextColumn Header="Fax Beschreibung" Binding="{Binding FaxDescription}"/>
+				<DataGridTextColumn Header="Mobilfunk (privat)" Binding="{Binding CellPersonal}"/>
+				<DataGridTextColumn Header="Mobilfunk Kurzwahl (privat)" Binding="{Binding CellPersonalSpeedDial}"/>
+				<DataGridTextColumn Header="Mobilfunk Beschreibung (privat)" Binding="{Binding CellPersonalDescription}"/>
+				<DataGridTextColumn Header="Zu Hause" Binding="{Binding Home}"/>
+				<DataGridTextColumn Header="Zu Hause Kurzwahl" Binding="{Binding HomeSpeedDial}"/>
+				<DataGridTextColumn Header="Zu Hause Beschreibung" Binding="{Binding HomeDescription}"/>
+				<DataGridTextColumn Header="Arbeit 2" Binding="{Binding Work2}"/>
+				<DataGridTextColumn Header="Arbeit 2 Kurzwahl" Binding="{Binding Work2SpeedDial}"/>
+				<DataGridTextColumn Header="Arbeit 2 Beschreibung" Binding="{Binding Work2Description}"/>
+				<DataGridTextColumn Header="Zu Hause 2" Binding="{Binding Home2}"/>
+				<DataGridTextColumn Header="Zu Hause 2 Kurzwahl" Binding="{Binding Home2SpeedDial}"/>
+				<DataGridTextColumn Header="Zu Hause 2 Beschreibung" Binding="{Binding Home2Description}"/>
+			</DataGrid.Columns>
+		</DataGrid>
+    </Grid>
+</Window>

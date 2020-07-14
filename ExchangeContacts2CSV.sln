@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29521.150
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExchangeContacts2CSV", "ExchangeContacts2CSV.csproj", "{1DAC72E5-0430-40C5-A138-D1EE2B3EA2C5}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "BCK", "BCK\BCK.shproj", "{EDFF2DF3-B0B3-4610-8B1E-337C5EA78FB3}"
+EndProject
+Global
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		BCK\BCK.projitems*{1dac72e5-0430-40c5-a138-d1ee2b3ea2c5}*SharedItemsImports = 4
+		BCK\BCK.projitems*{edff2df3-b0b3-4610-8b1e-337c5ea78fb3}*SharedItemsImports = 13
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1DAC72E5-0430-40C5-A138-D1EE2B3EA2C5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1DAC72E5-0430-40C5-A138-D1EE2B3EA2C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1DAC72E5-0430-40C5-A138-D1EE2B3EA2C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1DAC72E5-0430-40C5-A138-D1EE2B3EA2C5}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {1389877B-4F45-4F50-89FD-EF1884863983}
+	EndGlobalSection
+EndGlobal

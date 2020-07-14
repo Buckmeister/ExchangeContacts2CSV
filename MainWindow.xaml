@@ -1,0 +1,189 @@
+﻿<Window x:Class="ExchangeContacts2CSV.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ExchangeContacts2CSV"
+        mc:Ignorable="d"
+        Title="Exchange Kontakte in CSV exportieren" 
+		MinHeight="510" 
+		MinWidth="510"
+		Height="510"
+		Width="510"
+		Background="LightGray"
+		Loaded="Window_Loaded"
+		LocationChanged="Window_LocationChanged"
+		SizeChanged="Window_SizeChanged"
+		Closing="Window_Closing">
+    <Grid Margin="10">
+
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="Auto"/>
+			
+			<RowDefinition Height="*"/>
+			<RowDefinition Height="Auto"/>
+		</Grid.RowDefinitions>
+		
+		<GroupBox Grid.Column="0" Grid.Row="0" Header="Exchange Parameter">
+			<Grid>
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="Auto"/>
+					<ColumnDefinition Width="*"/>
+					<ColumnDefinition Width="Auto"/>
+				</Grid.ColumnDefinitions>
+				<Grid.RowDefinitions>
+					<RowDefinition Height="Auto"/>
+					<RowDefinition Height="Auto"/>
+					<RowDefinition Height="Auto"/>
+					<RowDefinition Height="Auto"/>
+					<RowDefinition Height="Auto"/>
+					<RowDefinition Height="Auto"/>
+				</Grid.RowDefinitions>
+
+				<Separator Grid.Row="0" Visibility="Hidden"/>
+
+				<Label Grid.Column="0" Grid.Row="1" Content="E-Mail:"/>
+				<TextBox Grid.Column="1"
+						 Grid.Row="1"
+						 Grid.ColumnSpan="2"
+						 x:Name="txtEmail"
+						 MinWidth="250"
+						 Height="25"
+						 VerticalContentAlignment="Center"
+						 Style="{StaticResource ValidatedTextBoxTextStyle}"
+						 Text="{Binding Username, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True}"/>
+
+				<Separator Grid.Row="2" Visibility="Hidden"/>
+
+				<Label Grid.Column="0" Grid.Row="3" Content="Passwort:"/>
+				<PasswordBox Grid.Column="1"
+							 Grid.Row="3"
+							 Grid.ColumnSpan="2"
+							 x:Name="pbPassword"
+							 MinWidth="250"
+							 MinHeight="25"
+							 VerticalContentAlignment="Center"
+							 IsEnabled="{Binding PasswordBoxEnabled}"
+							 PasswordChanged="pbPassword_PasswordChanged"/>
+				
+				<CheckBox Grid.Column="1"
+						  Grid.Row="4"
+						  x:Name="chkDebugMode"
+						  Content="Erweiterte Protokollierung aktivieren"
+						  IsChecked="{Binding DebugMode, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+						  VerticalAlignment="Center"/>
+				
+				<Button Grid.Column="2"
+						Grid.Row="4"
+						x:Name="btnLogin"
+						Content="Anmelden"
+						MinWidth="100"
+						Margin="0,5,0,5"
+						IsDefault="True"
+						IsEnabled="{Binding LoginEnabled}"
+						Command="{Binding LoginCommand}"
+						PreviewMouseDown="btnLogin_PreviewMouseDown"/>
+
+				<Label Grid.Column="0" Grid.Row="5" Content="Ordner:"/>
+				<ComboBox Grid.Column="1"
+						  Grid.Row="5"
+						  Grid.ColumnSpan="2"
+						  IsEditable="False"
+						  ItemsSource="{Binding ContactsFolderEntries}"
+						  DisplayMemberPath="Display"
+						  SelectedValuePath="ContactsFolder"
+						  MinHeight="25"
+						  SelectedValue="{Binding CurrentContactsFolder}"/>
+			</Grid>
+		</GroupBox>
+
+		<Separator Grid.Row="1" Visibility="Hidden"/>
+
+		<GroupBox Grid.Row="2" Header="Pfad zur CSV Ausgabedatei">
+			<Grid>
+				<Grid.RowDefinitions>
+				<RowDefinition Height="Auto"/>
+				<RowDefinition Height="Auto"/>
+				<RowDefinition Height="Auto"/>
+			</Grid.RowDefinitions>
+				
+				<Separator Grid.Row="0" Visibility="Hidden"/>
+
+				<TextBox Grid.Row="1"
+						 Grid.ColumnSpan="2"
+						 x:Name="txtPathToCsv"
+						 MinHeight="25"
+						 VerticalContentAlignment="Center"
+						 Style="{StaticResource ValidatedTextBoxTextStyle}"
+						 Text="{Binding PathToCsv, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True}"/>
+
+				<Button Grid.Row="2" 
+						MinWidth="100" 
+						Content="_Durchsuchen" 
+						x:Name="btnBrowse" 
+						Click="btnBrowse_Click"
+						HorizontalAlignment="Right"
+						Margin="0,5,0,0"/>
+
+			</Grid>
+		</GroupBox>
+		
+		<TextBox x:Name="txtLog"
+				 Grid.ColumnSpan="3"
+				 Grid.Row="3" 
+				 VerticalAlignment="Stretch" 
+				 HorizontalAlignment="Stretch" 
+				 VerticalContentAlignment="Top"
+				 HorizontalContentAlignment="Center"
+				 VerticalScrollBarVisibility="Visible"
+				 HorizontalScrollBarVisibility="Auto"
+				 TextWrapping="WrapWithOverflow"
+				 IsReadOnly="True"
+				 Background="LightGray"
+				 BorderBrush="White"
+				 Padding="5"
+				 Margin="0,5,0,0"/>
+
+		<Button x:Name="btnExport" 
+				Grid.Row="4" 
+				Margin="0,5,0,0" 
+				Content="Exportieren"
+				HorizontalAlignment="Right"
+				MinWidth="100"
+				IsEnabled="{Binding ExportEnabled}"
+				Command="{Binding ExportCommand}"/>
+
+		<Button x:Name="btnImport" 
+				Grid.Row="4" 
+				Margin="0,5,0,0" 
+				Content="Importieren"
+				HorizontalAlignment="Left"
+				MinWidth="100"
+				IsEnabled="{Binding ImportEnabled}"
+				Command="{Binding ImportCommand}"/>
+		
+		<Border  Grid.RowSpan="5" 
+				 x:Name="BorderMask" 
+				 Background="White"
+				 BorderBrush="Transparent" 
+				 BorderThickness="0" 
+				 CornerRadius="1" 
+				 Width="4" Height="4"
+				 Visibility="{Binding Path=IsBusy, Converter={StaticResource BoolToVis}}" />
+		
+		<Control Grid.RowSpan="5" 
+				 Style="{StaticResource BusyAnimationStyle}" 
+				 Visibility="{Binding Path=IsBusy, Converter={StaticResource BoolToVis}}" 
+				 Width="100" Height="100">
+			<Control.OpacityMask>
+				<VisualBrush Visual="{Binding ElementName=BorderMask}"/>
+			</Control.OpacityMask>
+		</Control>
+
+
+
+	</Grid>
+	
+</Window>
